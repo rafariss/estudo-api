@@ -65,10 +65,19 @@ public static class ProductRepository{
 
 }
 
+public class Category { 
+    
+    public int id { get; set; }
+    public String Name { get; set; }
+     }
+
 public class Product {
     public int id {get; set; }
     public String Code { get; set; }
     public String  Name { get; set; }
+
+    public int CategoryId { get; set; }
+    public Category Category { get; set; }
 }
 
 public class ApplicationDbContext : DbContext{ 
