@@ -75,7 +75,7 @@ public class ApplicationDbContext : DbContext{
 public DbSet<Product> Products { get; set; }
 
 protected override  void OnConfiguring(DbContextOptionsBuilder options) =>
-        options.UseSqlServer("Server=localhost/sqlexpress;Database=Produtos;User Id=sa;Password=sa@2019;MultipleActiveResultsSets-true;Encrypt=YES;TrustServerCertificate=YES");
+        options.UseSqlServer("Server=rissmann\\sqlexpress;Database=Produtos;User Id=sa;Password=sa@2019;MultipleActiveResultSets=true;Encrypt=YES;TrustServerCertificate=YES");
     
      
      
