@@ -5,24 +5,32 @@ var app = builder.Build();
 
 
 //metodo de envio de parametro
-app.MapPost("/product", (Product product) => { ProductRepository.Add(product); });
+app.MapPost("/products", (Product product) => {
+     ProductRepository.Add(product); 
+    return Results.Created("/products/" + product.Code, product.Code);
+     });
 
 //Metodo de recebimento de dados
-app.MapGet("/product/{code}", ([FromRoute]string code) => {
+app.MapGet("/products/{code}", ([FromRoute]string code) => {
     var product =  ProductRepository.GetBy(code);
-    return product;
+    if(product != null)
+        return Results.Ok("Produto codigo: " + product.Code + " não encontrado!!");
+    
+    return Results.NotFound();
 });
 
 //Metodo de alteração do produto
-app.MapPut("/product", (Product product) => {
+app.MapPut("/products", (Product product) => {
     var productSaved =  ProductRepository.GetBy(product.Code);
     productSaved.Name =  product.Name;
+    return Results.Ok();
 });
 
-app.MapDelete("/product/{code}", ([FromRoute]string code) =>{
+app.MapDelete("/products/{code}", ([FromRoute]string code) =>{
 
     var productSaved =  ProductRepository.GetBy(code);
     ProductRepository.Remove(productSaved);
+    return Results.Ok();
 
 });
 
