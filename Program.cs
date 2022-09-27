@@ -74,8 +74,15 @@ public class Product {
 public class ApplicationDbContext : DbContext{ 
 public DbSet<Product> Products { get; set; }
 
+protected override void OnModelCreating(ModelBuilder builder){
+
+    builder.Entity<Product>().Property(p => p.Name).HasMaxLength(100).IsRequired(false);
+    builder.Entity<Product>().Property(p => p.Code).HasMaxLength(20).IsRequired(false);
+}
+
 protected override  void OnConfiguring(DbContextOptionsBuilder options) =>
-        options.UseSqlServer("Server=rissmann\\sqlexpress;Database=Produtos;User Id=sa;Password=sa@2019;MultipleActiveResultSets=true;Encrypt=YES;TrustServerCertificate=YES");
+        options.UseSqlServer(
+            "Server=rissmann\\sqlexpress;Database=Produtos;User Id=sa;Password=sa@2019;MultipleActiveResultSets=true;Encrypt=YES;TrustServerCertificate=YES");
     
      
      
